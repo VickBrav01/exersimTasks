@@ -5,7 +5,6 @@
 // and supported IDEs when implementing this exercise. You don't need to
 // understand types, JSDoc, or TypeScript in order to complete this JavaScript
 // exercise, and can completely ignore this comment block and directive.
-
 // 👋🏽 Hi again!
 //
 // A quick reminder about exercise stubs:
@@ -18,7 +17,6 @@
 // in idiomatic JavaScript, but some companies and style-guides do enforce them.
 //
 // Get those rates calculated!
-
 /**
  * The day rate, given a rate per hour
  *
@@ -26,9 +24,8 @@
  * @returns {number} the rate per day
  */
 export function dayRate(ratePerHour) {
-  throw new Error('Remove this line and implement the function');
+  return ratePerHour * 8;
 }
-
 /**
  * Calculates the number of days in a budget, rounded down
  *
@@ -37,9 +34,11 @@ export function dayRate(ratePerHour) {
  * @returns {number} the number of days
  */
 export function daysInBudget(budget, ratePerHour) {
-  throw new Error('Remove this line and implement the function');
+  const hoursInDay = 8; // Assuming 8 working hours per day
+  const hoursInBudget = budget / ratePerHour; // Total hours available based on the budget
+  const days = Math.floor(hoursInBudget / hoursInDay); // Calculating days based on available hours
+  return days;
 }
-
 /**
  * Calculates the discounted rate for large projects, rounded up
  *
@@ -49,5 +48,15 @@ export function daysInBudget(budget, ratePerHour) {
  * @returns {number} the rounded up discounted rate
  */
 export function priceWithMonthlyDiscount(ratePerHour, numDays, discount) {
-  throw new Error('Remove this line and implement the function');
+  const dayRate = ratePerHour * 8; // Assuming 8 hours per day
+
+  const numMonths = Math.floor(numDays / 22); // Calculate the number of full months
+  const remainingDays = numDays % 22; // Calculate remaining days
+
+  const discountedCost = numMonths * 22 * dayRate * (1 - discount); // Cost for full months with discount
+  const remainingCost = Math.ceil(remainingDays * dayRate); // Cost for remaining days (rounded up)
+
+  const totalCost = Math.ceil(discountedCost + remainingCost); // Total cost
+
+  return totalCost;
 }
